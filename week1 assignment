@@ -1,0 +1,43 @@
+! wget https://raw.githubusercontent.com/hse-aml/natural-language-processing/master/setup_google_colab.py -O setup_google_colab.py
+import setup_google_colab
+setup_google_colab.setup_week1()
+import sys
+sys.path.append("..")
+from common.download_utils import download_week1_resources
+download_week1_resources()
+from grader import Grader
+grader = Grader()
+import nltk
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+from ast import literal_eval
+import pandas as pd
+import numpy as np
+import re
+REPLACE_BY_SPACE_RE = re.compile('[/(){}\[\]\|@,;]')
+BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
+STOPWORDS = set(stopwords.words('english'))
+
+def text_prepare(text):
+    """
+        text: a string
+        
+        return: modified initial string
+    """
+    text = # lowercase text
+    text = # replace REPLACE_BY_SPACE_RE symbols by space in text
+    text = # delete symbols which are in BAD_SYMBOLS_RE from text
+    text = # delete stopwords from text
+    return text
+    
+def test_text_prepare():
+    examples = ["SQL Server - any equivalent of Excel's CHOOSE function?",
+                "How to free c++ memory vector<int> * arr?"]
+    answers = ["sql server equivalent excels choose function", 
+               "free c++ memory vectorint arr"]
+    for ex, ans in zip(examples, answers):
+        if text_prepare(ex) != ans:
+            return "Wrong answer for the case: '%s'" % ex
+    return 'Basic tests are passed.'
+    
+print(test_text_prepare())
